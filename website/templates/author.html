@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya</title>
+    <link rel="stylesheet" href="static/author.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Londrina+Sketch&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Lilita+One&family=Londrina+Sketch&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+</head>
+<body>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary"
+      data-bs-theme="dark"
+      style="
+        background: #2e5266 !important;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+      "
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/home/">Social Media</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/home/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile/">My Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/edit/profile/">Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == '/author' %}active{% endif %}" href="/author">Author</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br><br><br>
+    <!-- Header -->
+    <header>
+        <div class="contents">
+            <h1>Profil Kelompok</h1>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="profile">
+            <img src="static/images/haki.jpg" alt="Foto Profil">
+            <div class="info">
+                <h2>Muhamad Akbar Baihaqqy Ramadhani</h2>
+                <h3>22.83.0866</h3>
+                <h3>S1 Teknik Komputer</h3>
+                <h3>Halo, saya Haki, seorang mahasiswa dari Kelas 22TK02...</h3>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="profile">
+            <img src="static/images/aidhil.jpg" alt="Foto Profil">
+            <div class="info">
+                <h2>Muhamad Aidhil Fitrah Ramadhan</h2>
+                <h3>22.83.0841</h3>
+                <h3>S1 Teknik Komputer</h3>
+                <h3>Halo, saya Muhamad Aidhil Fitrah Ramadan...</h3>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="profile">
+            <img src="static/images/david.jpg" alt="Foto Profil">
+            <div class="info">
+                <h2>David Chandra Putra Rianto</h2>
+                <h3>22.83.0847</h3>
+                <h3>S1 Teknik Komputer</h3>
+                <h3>Hii, saya David Chandra Putra Rianto...</h3>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="profile">
+            <img src="static/images/amir.jpg" alt="Foto Profil">
+            <div class="info">
+                <h2>Amir Nuril Izza Al Surur</h2>
+                <h3>22.83.0879</h3>
+                <h3>S1 Teknik Komputer</h3>
+                <h3>Halo, saya Amir, seorang mahasiswa dari Kelas 22TK02...</h3>
+            </div>
+        </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>

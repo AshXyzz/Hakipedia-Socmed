@@ -1,0 +1,73 @@
+/* General body styles */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #0668aa;
+    margin: 0;
+    padding-top: 70px; /* Memberi ruang untuk navbar tetap */
+}
+
+/* Navbar customization */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #2e5266 !important; /* Warna yang sama seperti di base.html */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Contents container */
+.contents {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-size: 30px;
+    background-color: #87ceeb;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+/* Profiles container */
+.content {
+    font-family: 'Times New Roman', Times, serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #87ceeb;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(114, 112, 112, 0.221);
+    margin-bottom: 20px;
+    margin-left: 350px;
+    margin-right: 350px;
+}
+
+/* Profile card */
+.profile {
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Vertical alignment */
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-right: 20px; /* Spacing between image and text */
+}
+
+.info {
+    flex: 1; /* Allow text to take up remaining space */
+}
+
+/* Headings color */
+h2 {
+    color: #2b2828;
+}

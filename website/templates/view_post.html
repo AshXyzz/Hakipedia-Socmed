@@ -1,0 +1,202 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container">
+  <h2>{{ post.title }}</h2>
+  <p>
+    <a
+      href="/profile/{{user.id}}"
+      style="color: #6e8898; text-decoration: none"
+    >
+      <img
+        src="../static/profile_pictures/{{user.profile_picture}}"
+        alt="Avatar Image"
+        style="border-radius: 50%; width: 50px; height: 50px"
+      />
+      {{ user.first_name }} {{ user.last_name }}</a
+    >
+    - {{ date }}
+  </p>
+  <p>{{ post.data | nl2br }}</p>
+
+  {% if current_user.id == post.user_id %}
+  <br />
+  <small
+    ><a
+      href="/delete/post/{{post.id}}"
+      onclick="return confirm('Are you sure you want to delete this post?')"
+      class="btn btn-sm btn-warning"
+      >Delete Post</a
+    ></small
+  >
+  {% else %}{% endif %}
+  <!-- Liking post -->
+  <form action="/post/{{post.id}}/like" method="post" style="display: inline">
+    <input type="submit" class="btn btn-danger btn-sm" value="👍" />
+    <p style="display: inline">{{ post.likes | count }}</p>
+  </form>
+  <!-- Disliking post -->
+  <form
+    action="/post/{{post.id}}/dislike"
+    method="post"
+    style="display: inline"
+  >
+    <input type="submit" class="btn btn-danger btn-sm" value="👎" />
+    <p style="display: inline">{{ post.dislikes | count }}</p>
+  </form>
+
+  <br /><br />
+  <h3>Comments ({{ post.comments | count }})</h3>
+  <!-- ACCORDION -->
+
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          Add Comment
+        </button>
+      </h2>
+      <div
+        id="collapseOne"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <!-- FORM -->
+          <form method="post" action="/post/{{ post.id }}/comment/">
+            <textarea
+              name="comment"
+              cols="30"
+              rows="1"
+              class="form-control"
+              placeholder="Write your comment..."
+              maxlength="1000"
+              required
+            ></textarea
+            ><br />
+            <input
+              type="submit"
+              value="Add Comment"
+              class="form-control btn btn-primary"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <!-- ACCORDION END -->
+  {% for comment in comments %}
+  <div class="border" style="border-radius: 10px; padding: 5px">
+    <a
+      href="/profile/{{ comment.user.id }}"
+      style="color: black; text-decoration: none"
+    >
+      <img
+        src="../static/profile_pictures/{{comment.user.profile_picture}}"
+        alt="Avatar Image"
+        style="border-radius: 50%; width: 30px; height: 30px"
+      />
+
+      <strong
+        >{{ comment.user.first_name }} {{ comment.user.last_name }}</strong
+      ></a
+    >
+    <p>{{ comment.data }}</p>
+    <form
+      action="/post/{{post.id}}/comment/{{comment.id}}/like"
+      method="post"
+      style="display: inline"
+    >
+      <input type="submit" class="btn btn-danger btn-sm" value="👍" />
+      <p style="display: inline">{{ comment.comment_likes | count }}</p>
+    </form>
+    {% if comment.user == current_user %}
+    <a
+      href="{{ url_for('views.delete_comment', id=comment.id) }}"
+      onclick="return confirm('Are you sure you want to delete this comment?')"
+      class="btn btn-sm btn-warning"
+      >Delete Comment</a
+    >
+    {% endif %}
+    <a
+      data-bs-toggle="collapse"
+      href="#collapseReply{{comment.id}}"
+      class="btn btn-sm btn-primary"
+      >Reply</a
+    >
+
+    <a
+      data-bs-toggle="collapse"
+      href="#collapseComments{{comment.id}}"
+      class="btn btn-sm btn-success"
+      >Show Replies ({{ comment.replies | count }})</a
+    >
+    <!-- REPLY TO COMMENT Collapse -->
+    <div class="collapse" id="collapseReply{{comment.id}}">
+      <br />
+      <div class="">
+        <form
+          action="{{ url_for('views.reply_to_comment', id=comment.id )}}"
+          method="post"
+        >
+          <input
+            type="text"
+            name="reply"
+            class="form-control"
+            placeholder="Write your reply..."
+            required
+          />
+          <input
+            type="submit"
+            value="Add reply"
+            class="btn btn-primary form-control"
+          />
+        </form>
+      </div>
+    </div>
+    <!-- Add Comment Collapse -->
+    <div class="collapse" id="collapseComments{{comment.id}}">
+      <br />
+      {% if comment.replies | count == 0 %}
+      <p>There are no replies.</p>
+      {% endif %} {% for reply in comment.replies %}
+      <p><a href="/profile/{{user.id}}" style="text-decoration: none;">
+        <img
+          src="../static/profile_pictures/{{reply.user.profile_picture}}"
+          alt="Avatar Image"
+          style="border-radius: 50%; width: 20px; height: 20px"
+        />
+        <strong
+          ><a
+            href="/profile/{{reply.user.id}}"
+            style="text-decoration: none; color: black"
+            >{{ reply.user.first_name }} {{ reply.user.last_name }}</a
+          ></strong
+        >
+        {{ reply.data }} {% set date = reply.date|string %} {% set date =
+        date.split(" ") %} <br />
+        <small
+          >({{ date[0] }}) {% if reply.user == current_user %}
+          <a
+            href="/delete/reply/{{ reply.id }}"
+            onclick="return confirm('Are you sure you want to delete this reply?')"
+            >Delete</a
+          >
+          {% endif %}
+        </small>
+      </p>
+
+      {% endfor %}
+    </div>
+  </div>
+  <br />
+  {% endfor %}
+</div>
+
+{% endblock %}

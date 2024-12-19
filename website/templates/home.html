@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container" style="background-color: #87ceeb; padding: 20px; border-radius: 10px;">
+  <form action="" method="post">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search..."
+        aria-label="Search"
+        aria-describedby="button-addon2"
+        name="search"
+      />
+      <input
+        class="btn btn-outline-primary"
+        type="submit"
+        id="button-addon2"
+        value="Search"
+      />
+    </div>
+  </form>
+  <h1>Recent Posts</h1>
+  {% for post, user in posts %}
+  <div class="border" style="border-radius: 10px; padding: 5px; background-color: white;">
+    <a href="/profile/{{user.id}}" style="text-decoration: none;">
+      <img
+        src="../static/profile_pictures/{{user.profile_picture}}"
+        alt="Avatar Image"
+        style="border-radius: 50%; width: 30px; height: 30px"
+      />
+    </a>
+    <a href="/profile/{{user.id}}" style="color: #6e8898; text-decoration: none;">
+      <small>{{ user.first_name }} {{ user.last_name }}</small>
+    </a>
+
+    <h5>
+      <a href="/post/{{post.id}}" style="color:black;text-decoration: none;">
+        <strong>{{ post.title }}</strong>
+      </a>
+    </h5>
+    <p>{{ post.data | nl2br }}</p>
+    
+    <!-- Liking Post -->
+    <form action="/post/{{post.id}}/like" method="post" style="display:inline">
+      <input type="submit" class="btn btn-danger btn-sm" value="👍" />
+      <span>{{ post.likes | count }}</span>
+    </form>
+    
+    <!-- Disliking Post -->
+    <form action="/post/{{post.id}}/dislike" method="post" style="display:inline">
+      <input type="submit" class="btn btn-danger btn-sm" value="👎" />
+      <span>{{ post.dislikes | count }}</span>
+    </form>
+    
+    <br>
+    <!-- Comment Count -->
+    <small>
+      <a href="/post/{{post.id}}" style="color: black;">
+        {{ post.comments | count }} {{ post.comments | count == 1 and 'Comment' or 'Comments' }}
+      </a>
+    </small>
+  </div>
+  <br />
+  {% endfor %}
+</div>
+{% endblock %}
