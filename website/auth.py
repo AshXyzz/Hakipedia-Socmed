@@ -37,11 +37,15 @@ def login_page():
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def signup_page():
+    # Inisialisasi form variables untuk kondisi POST
+    form_first_name = form_last_name = form_email = ""
+    
     if request.method == "GET":
         if current_user.is_authenticated:
             return redirect(url_for("views.home"))
         else:
             return render_template("signup_page.html", page="Sign Up", user=current_user)
+    
     elif request.method == "POST":
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
@@ -51,6 +55,7 @@ def signup_page():
 
         user = User.query.filter_by(email=email).first()
 
+        # Validasi email yang sudah terdaftar
         if user:
             flash("Email is already registered.", category="error")
         elif len(first_name) < 2:
@@ -61,6 +66,7 @@ def signup_page():
             flash("Email must be greater than 4 characters.", category='error')
             form_first_name = first_name
             form_last_name = last_name
+            form_email = email
         elif password1 != password2:
             flash("Passwords don't match.", category='error')
             form_first_name = first_name
@@ -72,6 +78,7 @@ def signup_page():
             form_last_name = last_name
             form_email = email
         else:
+            # Buat pengguna baru jika validasi berhasil
             new_user = User(email=email, first_name=first_name, last_name=last_name,
                             password=generate_password_hash(password1))  # Tanpa 'method="sha256"'
             db.session.add(new_user)
@@ -80,6 +87,7 @@ def signup_page():
             flash("You may log in now.", category="primary")
             return redirect(url_for('auth.login_page'))
 
+    # Kembalikan template dengan data form yang sudah diisi
     return render_template('signup_page.html', page="Sign Up", user=current_user, form_last_name=form_last_name, form_first_name=form_first_name, form_email=form_email)
 
 
