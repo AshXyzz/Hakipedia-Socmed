@@ -1,32 +1,18 @@
-# Social Media Clone
+# HakiPedia Socmed
 
-This is a social media clone that includes the basic features of a social media website. This program is like the skeleton for a social media website (includes both frontend and backend).
+Ini adalah tiruan media sosial yang mencakup fitur dasar situs media sosial. Program ini seperti kerangka situs media sosial (mencakup frontend dan backend).
+## Fitur
 
-## Features
-
-- Login
-- Sign Up
-- View user profiles
-- Edit your user profile/settings
-- Avatar image
+- Masuk
+- Mendaftar
+- Lihat profil pengguna
+- Edit profil/pengaturan pengguna Anda
+- Foto Profil
 - Posting
-- Most recent posts page (home)
-- Search bar that searches users and posts
-- Liking posts
-- disliking posts
-- Commenting on posts
-- replying to comments
-- liking comments (not replies)
-
-## Installation
-
-Download the source code and install the dependencies (below). Once that is done, run `python3 main.py` when inside the root directory for this project.
-
-### Dependencies
-
-- Python3
-- Python3 libraries:
-  - flask
-  - sqlalchemy
-  - flask_sqlalchemy
-  - flask_login
+- Halaman posting terbaru (beranda)
+- Bilah pencarian yang mencari pengguna dan postingan
+- Like postingan
+- Dislike postingan
+- Mengomentari postingan
+- membalas komentar
+- menyukai komentar (bukan balasan)
